@@ -1,0 +1,38 @@
+  <mat-sidenav-container >
+
+    <mat-sidenav #sidenav mode="push" >
+      <mat-card class="example-card" style="max-width: 260px">
+        <img mat-card-image src="https://image.freepik.com/vector-gratis/fondo-de-puesta-de-sol-y-perfil-de-ciudad_1092-41.jpg" >
+
+        <div class="userInfo">
+              <img src="https://icon-icons.com/icons2/827/PNG/512/user_icon-icons.com_66546.png"  style="max-height: 93px; max-width: 85px">
+              <br>
+              <a ><div class="white-text name">{{currentUser.nombre}}</div></a>
+              <a ><div class="white-text email">{{currentUser.email}} </div></a>
+        </div>
+
+
+        <mat-card-content>
+          <button (click)="goHome()" mat-button style="width: 100%; margin-bottom: 2px"><mat-icon>library_books</mat-icon>Noticias</button>
+          <button (click)="goAdmin()" mat-button style="width: 100%"><mat-icon>lock</mat-icon >Administracion</button>
+        </mat-card-content>
+
+      </mat-card>
+    </mat-sidenav>
+
+    <div class="my-content">
+       <mat-toolbar color="primary" *ngIf="isLogeado">
+
+          <mat-icon class="example-icon" style="margin-right: 10px" (click)="sidenav.open()">menu</mat-icon>
+          <span class="example-spacer"></span>
+          <mat-icon class="example-icon" [matMenuTriggerFor]="menu">more_vert</mat-icon>
+      </mat-toolbar>
+
+      <router-outlet></router-outlet>
+
+      <mat-menu #menu="matMenu">
+        <button (click)="singOut()" mat-menu-item><mat-icon>close</mat-icon>Cerrar Sesion</button>
+      </mat-menu>
+
+    </div>
+  </mat-sidenav-container>

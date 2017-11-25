@@ -1,0 +1,46 @@
+<div class="row" style="margin-left: 25%;  margin-right: 25%">
+  <div class="col s11" >
+        <label for="search">Buscar...</label>
+        <input matInput id="search" [(ngModel)]="search">
+  </div>
+  <div class="col s1">
+      <button (click)="searchBy()" mat-icon-button style="margin-top: 26px">
+        <mat-icon aria-label="Example icon-button with a heart icon">search</mat-icon>
+      </button>
+  </div>
+</div>
+
+
+<div class="row">
+  <mat-grid-list cols="3" rowHeight="350px" style="width: 100%">
+    <mat-grid-tile *ngFor=" let noticia of totalNoticias">
+
+
+
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{noticia.titular}}</mat-card-title>
+        </mat-card-header>
+
+        <img mat-card-image src="{{noticia.imagen}}" alt="No hay imagen">
+
+        <mat-card-content>
+          <p>
+            {{noticia.entrada}}
+          </p>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button style="width: 100%" (click)="verNoticia(noticia)" mat-button style="width: 100%" ><mat-icon>remove_red_eye</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+
+
+
+
+
+
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

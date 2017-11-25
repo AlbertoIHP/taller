@@ -1,0 +1,70 @@
+<mat-horizontal-stepper [linear]="true">
+
+
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Información general</ng-template>
+      <div class="row">
+        <div class="col s6">
+          <label for="name">Titulo</label>
+          <input matInput id="name" formControlName="firstCtrl" required [(ngModel)]="nuevaNoticia.titular" (ngModelChange)="checkGeneralInfo()" >
+        </div>
+        <div class="col s6">
+          <label for="description">Entrada</label>
+          <input matInput id="description" formControlName="firstCtrl" required [(ngModel)]="nuevaNoticia.entrada" (ngModelChange)="checkGeneralInfo()" >
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12">
+          <label for="imagen">URL de la imagen</label>
+          <input matInput id="imagen" formControlName="firstCtrl" required [(ngModel)]="nuevaNoticia.imagen" (ngModelChange)="checkGeneralInfo()" >
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12">
+          <button mat-button matStepperNext style="width: 100%" disabled="{{isntGeneralInfo}}">Siguiente <mat-icon>arrow_forward</mat-icon> </button>
+        </div>
+
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Detalle de la noticia</ng-template>
+
+      <div class="row">
+        <div class="col s12">
+          <mat-form-field class="example-full-width" style="width: 100%; height: 200px">
+            <textarea formControlName="secondCtrl" required style="max-height: 200px; height: 200px" matInput placeholder="Escribe tu noticia" [(ngModel)]="nuevaNoticia.cuerpo" (ngModelChange)="checkSigthInfo()"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12">
+          <mat-form-field style="width: 100%">
+            <mat-select placeholder="Categoria" formControlName="secondCtrl" required [(ngModel)]="nuevaNoticia.categorias_id" (ngModelChange)="checkSigthInfo()" >
+              <mat-option *ngFor="let categoria of totalCategorias" [value]="categoria.id">
+                {{ categoria.descripcion }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s6">
+          <button mat-button matStepperPrevious style="width: 100%" > <mat-icon>arrow_back</mat-icon> Volver</button>
+        </div>
+        <div class="col s6">
+          <button mat-button (click)="agregarNoticia()" disabled="{{isntSigthInfo}}" style="width: 100%" >Agregar <mat-icon>add</mat-icon> </button>
+        </div>
+
+
+      </div>
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>

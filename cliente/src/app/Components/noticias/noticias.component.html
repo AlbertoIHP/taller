@@ -1,0 +1,86 @@
+
+<div class="example-header" >
+
+
+    <label for="finder">Buscar por titular...</label>
+    <input id="finder" matInput #filter >
+
+</div>
+
+
+<div class="example-container mat-elevation-z8">
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="Acciones">
+      <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+
+              <button  mat-icon-button (click) = "edicionNoticia(row)" >
+                <mat-icon >create</mat-icon>
+              </button>
+
+
+              <button  mat-icon-button (click) = "eliminarNoticia(row)" >
+                <mat-icon >delete</mat-icon>
+              </button>
+
+       </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="Titular">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Titular </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.titular}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Fecha">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header> Fecha </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.fecha}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Categoria">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header> Categoria </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.categorias_id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Usuario">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header> Usuario Autor</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.usuarios_id}} </mat-cell>
+    </ng-container>
+
+
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="['odd', 'highlight'][row.id %2]"></mat-row>
+
+  </mat-table>
+
+  <div class="example-no-results"
+       [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+       No hay noticias con dicho titular.
+  </div>
+
+  <mat-paginator #paginator
+                [length]="dataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="5"
+                [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>
+
+ <div class="fixed-action-btn">
+    <a class="btn-floating btn-large blue"  (click)="agregacionNoticia()">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>
+
+
+
+
+
+
+
+
